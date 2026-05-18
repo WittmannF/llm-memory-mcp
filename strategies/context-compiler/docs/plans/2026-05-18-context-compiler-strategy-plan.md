@@ -1,24 +1,26 @@
-# LLM Memory MCP Implementation Plan
+# Context Compiler Strategy Implementation Plan
 
 > **For Hermes:** Use subagent-driven-development skill to implement this plan task-by-task.
 >
 > **Status:** Docs-only planning artifact. No implementation code has been created yet.
+>
+> **Monorepo note:** This is now one strategy inside the LLM Memory Strategies monorepo. It should consume the shared source-of-truth layer rather than owning raw ingestion/storage itself.
 
-**Goal:** Build `llm-memory-mcp`, a global plug-and-play MCP server for reusable LLM memory contexts, where each context is a portable Markdown-first knowledge base with raw sources, LLM-friendly extracted sources, a root `summary-context.md`, HTML inspection, search, and durable topic reports.
+**Goal:** Build the `context-compiler` strategy: a richer memory compiler for reusable LLM contexts, producing a root `summary-context.md`, HTML inspection, search/context packs, and durable topic reports from the shared source-of-truth.
 
-**Architecture:** A local-first Python service with one domain/service layer exposed through both MCP tools and FastAPI/HTTP. Markdown files are the source of truth; SQLite FTS, manifests, and HTML are generated/reconstructible artifacts. The system manages multiple context folders globally, but each context has a single canonical `summary-context.md` at its root.
+**Architecture:** A local-first strategy package that consumes evidence from `shared/source-of-truth-store` / `source-of-truth/contexts/<context>/`. It owns compiled artifacts such as summaries, reports, optional wiki/topic pages, and context packs. Markdown files remain the durable strategy outputs; SQLite FTS, manifests, and HTML are generated/reconstructible artifacts.
 
-**Tech Stack:** Python 3.11+ or 3.12+, FastAPI, Python MCP SDK/FastMCP, Pydantic v2, SQLite FTS5, Jinja2, markdown-it-py, Typer, pytest, optional LiteLLM, optional MarkItDown/faster-whisper/vision OCR adapters.
+**Tech Stack:** Python 3.11+ or 3.12+, FastAPI, Python MCP SDK/FastMCP, Pydantic v2, SQLite FTS5, Jinja2, markdown-it-py, Typer, pytest, optional LiteLLM, optional strategy-side embeddings/vector search.
 
 ---
 
 ## 1. Product definition
 
-`llm-memory-mcp` is a global memory/context compiler for LLMs.
+`context-compiler` is a strategy package in the monorepo. It should consume the shared source-of-truth store rather than owning raw evidence ingestion.
 
 It should let Fernando and other LLM clients:
 
-1. Create or register reusable contexts, e.g.:
+1. Create or register reusable contexts through the shared source-of-truth layer, e.g.:
    - `saude-pai`
    - `trabalho`
    - `imoveis`
@@ -43,8 +45,10 @@ It should let Fernando and other LLM clients:
 The project is not just a RAG system. It is a **context compiler**:
 
 ```text
-raw sources -> extracted markdown -> searchable/indexed knowledge -> summary-context.md -> topic reports -> HTML inspection
+shared source-of-truth events/references/facts -> extracted markdown -> strategy indexes -> summary-context.md -> topic reports -> context packs -> HTML inspection
 ```
+
+This is no longer the only strategy in the repository. It should be benchmarked against `strategies/baseline-single-file` and any future strategies under `strategies/`.
 
 ---
 
@@ -1021,17 +1025,19 @@ llm-memory-mcp/
 
 Deliverables:
 
-- `README.md`
-- `LICENSE`
-- `docs/plans/...`
-- `docs/research/...`
-- `docs/adr/0001-license.md`
-- `docs/architecture.md` high-level overview
+- root `README.md`
+- root `.gitignore`
+- `strategies/context-compiler/README.md`
+- `strategies/context-compiler/docs/plans/...`
+- root `docs/research/...`
+- root `docs/architecture/...`
+- shared source-of-truth plan under `shared/source-of-truth-store/`
+- benchmark plan under `benchmarks/memory-strategy-benchmark/`
 
 Acceptance:
 
 - repo exists locally and on GitHub under `WittmannF/llm-memory-mcp`;
-- plan committed and pushed;
+- monorepo docs are committed and pushed;
 - no implementation scaffolding beyond docs unless explicitly approved.
 
 ## Phase 1 — Python project scaffold

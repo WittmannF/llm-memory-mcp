@@ -1,0 +1,14 @@
+{
+  "schema_version": 1,
+  "context": "<context-slug>",
+  "description": "<context description>",
+  "created_at": "YYYY-MM-DDTHH:MM:SSZ",
+  "updated_at": "YYYY-MM-DDTHH:MM:SSZ",
+  "image_policy": "image_on_demand",
+  "events": [],
+  "references": [],
+  "facts": {
+    "path": "facts/facts.md",
+    "status": "optional"
+  }
+}

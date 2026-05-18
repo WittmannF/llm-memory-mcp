@@ -1,0 +1,15 @@
+# Real context data may contain private/sensitive material.
+# Keep only templates and documentation in this public repo.
+/source-of-truth/contexts/*
+!/source-of-truth/contexts/README.md
+
+# Python/editor/build artifacts for future implementation work.
+__pycache__/
+*.py[cod]
+.venv/
+.env
+.DS_Store
+.pytest_cache/
+.ruff_cache/
+dist/
+build/
