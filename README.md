@@ -23,8 +23,18 @@ Planning phase. No implementation code yet.
 See:
 
 - [`docs/plans/2026-05-18-llm-memory-mcp-implementation-plan.md`](docs/plans/2026-05-18-llm-memory-mcp-implementation-plan.md)
-- [`docs/research/basic-memory-review.md`](docs/research/basic-memory-review.md)
-- [`docs/research/claude-brainstorm.md`](docs/research/claude-brainstorm.md)
+
+## Research base
+
+Start with:
+
+- [`docs/research/README.md`](docs/research/README.md) — research index and high-level conclusions.
+- [`docs/research/best-practices-llm-memory.md`](docs/research/best-practices-llm-memory.md) — best practices for LLM memory management.
+- [`docs/research/literature-map.md`](docs/research/literature-map.md) — papers and systems that inform the design.
+- [`docs/research/project-recommendations.md`](docs/research/project-recommendations.md) — recommendations translated into project decisions.
+- [`docs/research/evaluation-and-quality.md`](docs/research/evaluation-and-quality.md) — evaluation plan for memory quality.
+- [`docs/research/basic-memory-review.md`](docs/research/basic-memory-review.md) — Basic Memory review and license boundary.
+- [`docs/research/claude-brainstorm.md`](docs/research/claude-brainstorm.md) — Claude/Cursor Agent brainstorm.
 
 ## Reference inspiration
 

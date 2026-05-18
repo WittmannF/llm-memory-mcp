@@ -73,7 +73,15 @@ Allowed later:
 
 ---
 
-## 3. Reference project review
+## 3. Research base
+
+The expanded research base lives in `docs/research/` and should be treated as part of the planning source of truth:
+
+- `docs/research/README.md` — research index and high-level conclusions.
+- `docs/research/best-practices-llm-memory.md` — practical best practices for memory tiers, provenance, staleness, extraction, and context packs.
+- `docs/research/literature-map.md` — papers/systems including RAG, ReAct, Reflexion, Generative Agents, MemoryBank, MemGPT, Self-RAG, RAPTOR, GraphRAG, HippoRAG, LightRAG, Basic Memory, and LLM Wiki references.
+- `docs/research/project-recommendations.md` — concrete design recommendations for this repo.
+- `docs/research/evaluation-and-quality.md` — retrieval, provenance, staleness, contradiction, portability, and UI inspection checks.
 
 ### Basic Memory
 
